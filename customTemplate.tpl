@@ -8,7 +8,25 @@ external-controller: :9090
 {% if default(request.clash.dns, "0") == "1" %}
 dns:
   enabled: true
-  listen: 1053
+  listen: '0.0.0.0:1053'
+  enhanced-mode: fake-ip
+  nameserver:
+    - 101.6.6.6
+    - 2001:da8::666
+    - https://223.5.5.5/dns-query
+    - https://dns.pub/dns-query
+    - https://rubyfish.cn/dns-query
+    - 119.29.29.29
+    - 114.114.114.114
+  fallback:
+    - https://doh.rixcloud.dev/dns-query
+    - https://doh.dns.sb/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.quad9.net/dns-query
+    - tls://dns.google:853
+  fake-ip-filter:
+    - '*.lan'
+    - localhost.ptlogin2.qq.com
 {% endif %}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
