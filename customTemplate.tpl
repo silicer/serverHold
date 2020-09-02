@@ -5,7 +5,7 @@ allow-lan: {{ default(local.clash.allow_lan, "true") }}
 mode: Rule
 log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: :9090
-{% if default(request.clash.dns, "0") == "1" %}
+{# {% if default(request.clash.dns, "0") == "1" %} #}
 dns:
   enabled: true
   listen: '0.0.0.0:1053'
@@ -27,7 +27,7 @@ dns:
   fake-ip-filter:
     - '*.lan'
     - localhost.ptlogin2.qq.com
-{% endif %}
+{# {% endif %} #}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
 proxy-groups: ~
