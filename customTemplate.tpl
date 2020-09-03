@@ -8,7 +8,9 @@ external-controller: :9090
 {# {% if default(request.clash.dns, "0") == "1" %} #}
 dns:
   enabled: true
-  listen: '0.0.0.0:1053'
+  ipv6: true
+  # listen: '0.0.0.0:1053'
+  listen: '127.0.0.1:1053'
   enhanced-mode: fake-ip
   nameserver:
     - "[2001:da8::666]:53"
