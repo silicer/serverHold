@@ -11,8 +11,7 @@ dns:
   listen: '0.0.0.0:1053'
   enhanced-mode: fake-ip
   nameserver:
-    - 101.6.6.6
-    - 2001:da8::666
+    - "[2001:da8::666]:53"
     - https://223.5.5.5/dns-query
     - https://dns.pub/dns-query
     - https://rubyfish.cn/dns-query
