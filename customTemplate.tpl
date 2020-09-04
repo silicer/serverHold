@@ -12,6 +12,9 @@ dns:
   # listen: '0.0.0.0:1053'
   listen: '127.0.0.1:1053'
   enhanced-mode: fake-ip
+  default-nameserver:
+    - 8.8.4.4
+    - "[2001:da8::666]:53"
   nameserver:
     - "[2001:da8::666]:53"
     - https://223.5.5.5/dns-query
