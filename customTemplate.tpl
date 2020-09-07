@@ -7,7 +7,7 @@ log-level: {{ default(global.clash.log_level, "info") }}
 external-controller: :9090
 {# {% if default(request.clash.dns, "0") == "1" %} #}
 dns:
-  enabled: true
+  enable: true
   ipv6: true
   # listen: '0.0.0.0:1053'
   listen: '127.0.0.1:1053'
