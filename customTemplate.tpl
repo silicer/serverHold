@@ -16,8 +16,10 @@ dns:
     - tcp://223.5.5.5
     - "[2001:da8::666]:53"
     - tcp://8.8.4.4
+    - tcp://101.6.6.6:5353
   nameserver:
     - "[2001:da8::666]:53"
+    - tcp://101.6.6.6:5353
     - https://223.5.5.5/dns-query
     - https://dns.pub/dns-query
     - https://rubyfish.cn/dns-query
