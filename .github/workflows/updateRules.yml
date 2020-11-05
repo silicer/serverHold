@@ -25,19 +25,19 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: update the rules
-        run: 
+        run:
           cd SmartDNS/
           ./updateRules.sh
-          
+
       - name: commit
-          git config --global user.email ${{ secrets.GITHUB_EMAIL }}
-          git config --global user.name ${{ secrets.GITHUB_NAME }}
+          git config --global user.email ${{ secrets.mail }}
+          git config --global user.name ${{ secrets.username }}
           git add .
           tIme=$(date "+%Y-%m-%d %H:%M:%S")
           git commit -m "Updated ${tIme}" -a
-          
-          
+
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.token }}
