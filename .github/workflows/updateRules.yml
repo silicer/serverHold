@@ -27,6 +27,7 @@ jobs:
       - name: update the rules
         run: |
           cd SmartDNS/
+          chmod +x updateRules.sh
           ./updateRules.sh
 
       - name: commit
