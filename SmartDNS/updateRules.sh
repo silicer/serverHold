@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ###
  # @Author: Silicer
  # @Date: 2020-09-23 14:15:42
@@ -5,7 +7,6 @@
  # @LastEditors: Silicer
  # @LastEditTime: 2020-11-05 20:10:05
 ###
-#!/bin/bash
 
 echo "Updating China List"
 chinaList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
