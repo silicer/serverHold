@@ -25,12 +25,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: update the rules
-        run:
+        run: |
           cd SmartDNS/
           ./updateRules.sh
 
       - name: commit
-        run:
+        run: |
           git config --global user.email ${{ secrets.mail }}
           git config --global user.name ${{ secrets.username }}
           git add .
