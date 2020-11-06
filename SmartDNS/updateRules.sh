@@ -22,5 +22,8 @@ bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/ma
 
 wait
 
-echo -e "${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
-echo -e "${bogusDomain}" > bogusDomain.conf
+tIme=$(date "+%Y-%m-%d %H:%M:%S")
+editTimeString="#Last Edit Time ${tIme}"
+
+echo -e "${editTimeString}\n${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
+echo -e "${editTimeString}\n${bogusDomain}" > bogusDomain.conf
