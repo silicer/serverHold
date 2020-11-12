@@ -28,6 +28,7 @@ jobs:
           ./updateRules.sh
 
       - name: commit
+        continue-on-error: true
         run: |
           git config --global user.email ${{ secrets.mail }}
           git config --global user.name ${{ secrets.username }}
@@ -37,6 +38,7 @@ jobs:
 
 
       - name: Push changes
+        if: ${{ success() }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.token }}
