@@ -5,7 +5,7 @@
  # @Date: 2020-09-23 14:15:42
  # @Description:
  # @LastEditors: Silicer
- # @LastEditTime: 2020-11-12 09:41:37
+ # @LastEditTime: 2020-11-20 21:14:41
 ###
 
 echo "Updating China List"
@@ -23,7 +23,7 @@ bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/ma
 wait
 
 # tIme=$(date "+%Y-%m-%d %H:%M:%S")
-# editTimeString="#Last Edit Time ${tIme}"
+# editTimeString="#Last Edit Time ${tIme}\n"
 
-echo -e "${editTimeString}\n${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
-echo -e "${editTimeString}\n${bogusDomain}" > bogusDomain.conf
+echo -e "${editTimeString}${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
+echo -e "${editTimeString}${bogusDomain}" > bogusDomain.conf
