@@ -19,7 +19,17 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Import GPG Key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v3
+        with:
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git-user-signingkey: true
+          git-commit-gpgsign: true
 
       # Runs a single command using the runners shell
       - name: update the rules
@@ -35,8 +45,7 @@ jobs:
           git config --global user.name ${{ secrets.username }}
           git add .
           tIme=$(date "+%Y-%m-%d %H:%M:%S")
-          git commit -m "Updated ${tIme}" -a
-
+          git commit -S -m "Updated ${tIme}" -a
 
       - name: Push changes
         if: ${{ success() }}
