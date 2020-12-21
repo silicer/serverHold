@@ -22,7 +22,6 @@ dns:
     - https://dns.pub/dns-query
     - https://rubyfish.cn/dns-query
   fallback:
-    - https://doh.rixcloud.dev/dns-query
     - https://doh.dns.sb/dns-query
     - https://dns.cloudflare.com/dns-query
     - https://dns.quad9.net/dns-query
