@@ -22,6 +22,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: release
 
       - name: Import GPG Key
         id: import_gpg
@@ -35,8 +37,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: update the rules
         run: |
-          git checkout release
-
           chinaList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
           googleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/google.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
           appleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/apple.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
