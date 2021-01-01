@@ -18,6 +18,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,9 +35,16 @@ jobs:
       # Runs a single command using the runners shell
       - name: update the rules
         run: |
-          cd SmartDNS/
-          chmod +x updateRules.sh
-          ./updateRules.sh
+          git checkout release
+
+          chinaList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
+          googleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/google.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
+          appleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/apple.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
+          bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/bogus-nxdomain.china.conf | sed -n '/=/p' | sed 's/=/ /g' &)
+
+          echo -e "${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
+          echo -e "${bogusDomain}" > bogusDomain.conf
+
 
       - name: commit
         continue-on-error: true
@@ -44,8 +52,8 @@ jobs:
           git config --global user.email ${{ secrets.mail }}
           git config --global user.name ${{ secrets.username }}
           git add .
-          tIme=$(date "+%Y-%m-%d %H:%M:%S")
-          git commit -S -m "Updated ${tIme}" -a
+          tIme=$(env TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          git commit -S -m "Updated at ${tIme} UTC+8" -a
 
       - name: Push changes
         if: ${{ success() }}
