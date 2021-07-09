@@ -41,8 +41,10 @@ jobs:
           googleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/google.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
           appleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/apple.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
           bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/bogus-nxdomain.china.conf | sed -n '/=/p' | sed 's/=/ /g' &)
+          
+          manualList=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manual.conf)
 
-          echo -e "${chinaList}\n${googleCNList}\n${appleCNList}" > chinaList.conf
+          echo -e "${chinaList}\n${googleCNList}\n${appleCNList}\n${manualList}" > chinaList.conf
           echo -e "${bogusDomain}" > bogusDomain.conf
 
 
