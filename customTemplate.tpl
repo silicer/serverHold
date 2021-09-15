@@ -13,11 +13,9 @@ dns:
   listen: '127.0.0.1:1053'
   enhanced-mode: fake-ip
   default-nameserver:
-    # - tcp://101.6.6.6:5353
     - udp://101.6.6.6:5353
     - "[2001:da8::666]:53"
     - udp://223.5.5.5
-    # - tcp://8.8.4.4
   nameserver:
     - udp://223.5.5.5
     - udp://119.29.29.29
@@ -26,10 +24,8 @@ dns:
     - https://dns.pub/dns-query
   fallback:
     - https://101.6.6.6:8443/dns-query
-    - https://doh.dns.sb/dns-query
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.quad9.net/dns-query
-    - tls://dns.google:853
+    - tls://1.1.1.1:853
+    - tls://i.passcloud.xyz:5432
   fake-ip-filter:
     - '*.lan'
     - localhost.ptlogin2.qq.com
