@@ -37,16 +37,21 @@ jobs:
       # Runs a single command using the runners shell
       - name: update the rules
         run: |
-          chinaList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
-          googleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/google.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China_2/g' &)
-          appleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/apple.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g' &)
-          bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/bogus-nxdomain.china.conf | sed -n '/=/p' | sed 's/=/ /g' &)
-          
-          manualList=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manual.conf)
+          chinaList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g')
+          googleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/google.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/GoogleCN/g')
+          appleCNList=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/apple.china.conf | sed 's/server=/nameserver /g' | sed 's/114.114.114.114/China/g')
+          bogusDomain=$(curl -sSL https://github.com/felixonmars/dnsmasq-china-list/raw/master/bogus-nxdomain.china.conf | sed -n '/=/p' | sed 's/=/ /g')
 
-          echo -e "${chinaList}\n${appleCNList}\n${manualList}" > chinaList.conf
-          echo -e "${googleCNList}" > googleCNList.conf
-          echo -e "${bogusDomain}" > bogusDomain.conf
+          manualList=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manual.conf)
+          manualDefault=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manualDefault.txt)
+
+          manual=$(echo -e "$(echo "${manualList}" | grep -oP '(?<=\/).*(?=\/)')\n${manualDefault}")
+          for line in ${manual}; do
+              chinaList=$(echo "${chinaList}" | sed "/\/${line}\//d")
+          done
+          echo -e "${chinaList}\n${appleCNList}\n${manualList}" >chinaList.conf
+          echo -e "${googleCNList}" >googleCNList.conf
+          echo -e "${bogusDomain}" >bogusDomain.conf
 
 
       - name: commit
