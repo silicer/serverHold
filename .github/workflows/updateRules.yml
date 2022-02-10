@@ -45,7 +45,7 @@ jobs:
           manualList=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manual.conf)
           manualDefault=$(curl -sSL https://github.com/silicer/serverHold/raw/master/Ruleset/manualDefault.txt)
 
-          manual=$(echo -e "$(echo "${manualList}" | grep -oP '(?<=\/).*(?=\/)')\n${manualDefault}")
+          manual=$(echo -e "$(echo "${manualList}" | grep -v '^#' | grep -oP '(?<=\/).*(?=\/)')\n${manualDefault}")
           for line in ${manual}; do
               chinaList=$(echo "${chinaList}" | sed "/\/${line}\//d")
           done
