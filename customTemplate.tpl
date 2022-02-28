@@ -23,9 +23,9 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://dns.pub/dns-query
   fallback:
-    - https://101.6.6.6:8443/dns-query
-    - tls://1.1.1.1:853
-    - tls://i.passcloud.xyz:5432
+    - 1.1.1.1
+    - tls://dns.google
+    - tls://1.1.1.1
   fake-ip-filter:
     - '*.lan'
     - localhost.ptlogin2.qq.com
