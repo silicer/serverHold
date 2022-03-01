@@ -13,22 +13,80 @@ dns:
   listen: '127.0.0.1:1053'
   enhanced-mode: fake-ip
   default-nameserver:
-    - udp://101.6.6.6:5353
-    - "[2001:da8::666]:53"
-    - udp://223.5.5.5
+    - "[2001:da8::666]"
+    - 223.5.5.5
   nameserver:
     - udp://223.5.5.5
     - udp://119.29.29.29
-    - udp://101.6.6.6:5353
     - https://dns.alidns.com/dns-query
     - https://dns.pub/dns-query
   fallback:
-    - 1.1.1.1
     - tls://dns.google
     - tls://1.1.1.1
   fake-ip-filter:
-    - '*.lan'
+    - "*.lan"
+    - "*.local"
+    - "dns.msftncsi.com"
+    - "www.msftncsi.com"
+    - "www.msftconnecttest.com"
+    - "stun.*.*.*"
+    - "stun.*.*"
+    - miwifi.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - netis.cc
+    - router.asus.com
+    - repeater.asus.com
+    - routerlogin.com
+    - routerlogin.net
+    - tendawifi.com
+    - tendawifi.net
+    - tplinklogin.net
+    - tplinkwifi.net
+    - tplinkrepeater.net
+    - "*.ntp.org.cn"
+    - "*.openwrt.pool.ntp.org"
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
     - localhost.ptlogin2.qq.com
+    - "*.*.*.srv.nintendo.net"
+    - "*.*.stun.playstation.net"
+    - "xbox.*.*.microsoft.com"
+    - "*.ipv6.microsoft.com"
+    - "*.*.xboxlive.com"
+    - speedtest.cros.wr.pvp.net
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+      - 127.0.0.1/8
+      - 0.0.0.0/32
+    domain:
+      - +.google.com
+      - +.facebook.com
+      - +.twitter.com
+      - +.youtube.com
+      - +.xn--ngstr-lra8j.com
+      - +.google.cn
+      - +.googleapis.cn
+      - +.googleapis.com
+      - +.gvt1.com
 {# {% endif %} #}
 {% if local.clash.new_field_name == "true" %}
 proxies: ~
