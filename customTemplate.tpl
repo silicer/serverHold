@@ -21,8 +21,8 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://dns.pub/dns-query
   fallback:
-    - tls://dns.google
-    - tls://1.1.1.1
+    - 1.1.1.1
+    - 1.0.0.1
   fake-ip-filter:
     - "*.lan"
     - "*.local"
